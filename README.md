@@ -117,8 +117,12 @@ Portal pemesanan janji temu telemedicine interaktif 3-langkah bagi pasien dengan
 ---
 
 ### 2. 🤖 AI Symptom Checker & Emergency Triage
-Analisis gejala mandiri pasien bertenaga AI Google Gemini 3.5 dengan deteksi Red-Flag Emergency:
-*(Screenshot modul skrining AI akan ditambahkan di sini)*
+Analisis gejala mandiri pasien bertenaga AI **Google Gemini 3.5** (`gemini-3.5-flash`) dengan triase otomatis & deteksi Red-Flag Emergency:
+
+| Form Input & Keparahan | Ringkasan Skrining & Indikasi | Rekomendasi Dokter Spesialis |
+| :---: | :---: | :---: |
+| <img src="docs/screenshots/ai-symptom-step1-input.png" alt="Form Input Gejala AI" width="220"/> | <img src="docs/screenshots/ai-symptom-step2-summary.png" alt="Ringkasan Skrining AI" width="220"/> | <img src="docs/screenshots/ai-symptom-step3-recommendation.png" alt="Rekomendasi Dokter AI" width="220"/> |
+| *Pilihan gejala, durasi & keparahan* | *Triase (Sedang/Perlu Terjadwal)* | *Rekomendasi dokter & disclaimer medis* |
 
 ---
 
