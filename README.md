@@ -97,13 +97,39 @@ Buka browser Anda dan akses aplikasi di: **`http://localhost:3000`**.
 
 ## 📱 Tangkapan Layar & Modul Aplikasi (Screenshots)
 
-> *(Tambahkan gambar tangkapan layar fitur di bawah ini setelah melakukan pengujian lokal)*
+Berikut adalah galeri tampilan antarmuka (UI) dari berbagai modul utama RS TeleMedika Digital:
 
-- **Dashboard Pasien & Booking Wizard**: Portal booking janji temu 3-langkah dengan filter dokter spesialis.
-- **Skrining Gejala AI Symptom Checker**: UI interaktif dialog analisis gejala dengan deteksi *Red-Flag Box*.
-- **Ruang Konsultasi Video Call**: Antarmuka video call WebRTC LiveKit lengkap dengan control bar media.
-- **Form EMR & Resep Digital Dokter**: Pengisian diagnosis klinis, resep obat array-item, dan unduh laporan PDF.
-- **Dashboard Analytics Hospital Admin**: Grafik statistik Recharts tren konsultasi, top 5 dokter, dan agregat diagnosa.
+### 1. 📅 Dashboard Pasien & Booking Wizard (Janji Temu 3-Langkah)
+Portal pemesanan janji temu telemedicine interaktif 3-langkah bagi pasien dengan filter spesialisasi dokter:
+
+| Step 1: Filter & Pilih Dokter | Step 2: Pilih Tanggal & Jam Praktik | Step 3: Konfirmasi Booking |
+| :---: | :---: | :---: |
+| <img src="docs/screenshots/booking-step1-select-doctor.png" alt="Step 1 Pilih Dokter" width="100%"/> | <img src="docs/screenshots/booking-step2-select-schedule.png" alt="Step 2 Pilih Jam Praktik" width="100%"/> | <img src="docs/screenshots/booking-step3-confirmation.png" alt="Step 3 Konfirmasi Booking" width="100%"/> |
+| *Filter spesialisasi & daftar dokter* | *Slot jam real-time & kalender* | *Status pending & detail rincian* |
+
+---
+
+### 2. 🤖 AI Symptom Checker & Emergency Triage
+Analisis gejala mandiri pasien bertenaga AI Google Gemini 3.5 dengan deteksi Red-Flag Emergency:
+*(Screenshot modul skrining AI akan ditambahkan di sini)*
+
+---
+
+### 3. 📹 Ruang Konsultasi Video Call WebRTC (LiveKit Cloud)
+Sesi konsultasi tatap muka dokter & pasien langsung di browser:
+*(Screenshot modul video call akan ditambahkan di sini)*
+
+---
+
+### 4. 💊 Form EMR Medis, Resep Digital & Laporan PDF
+Pengisian diagnosis klinis oleh dokter, resep obat multi-item, dan pengunduhan PDF ber-Kop RS:
+*(Screenshot modul resep & PDF akan ditambahkan di sini)*
+
+---
+
+### 5. 📊 Dashboard Analytics Hospital Admin (Recharts)
+Grafik tren operasional RS, top 5 dokter teraktif, dan agregat diagnosa penyakit:
+*(Screenshot modul analytics admin akan ditambahkan di sini)*
 
 ---
 
