@@ -139,8 +139,27 @@ Pengisian diagnosis klinis oleh dokter, resep obat multi-item, dan pengunduhan P
 ---
 
 ### 5. 📊 Dashboard Analytics Hospital Admin (Recharts)
-Grafik tren operasional RS, top 5 dokter teraktif, dan agregat diagnosa penyakit:
-*(Screenshot modul analytics admin akan ditambahkan di sini)*
+Visualisasi tren operasional rumah sakit khusus Admin berbasis grafik responsif (**Recharts**) dengan agregasi DB Sisi Server (Zero Patient PII):
+
+#### 🏆 Header Overview & Kartu Indikator Utama
+<p align="center">
+  <img src="docs/screenshots/analytics-admin-overview.png" alt="Header & Ringkasan Metrik Admin" width="100%"/>
+  <br/>
+  <i>Kartu indikator angka utama (Total Pasien, Total Dokter, Total Sesi Konsultasi, & Skrining AI)</i>
+</p>
+
+#### 📈 Tren Konsultasi & Breakdown Status Janji Temu
+<p align="center">
+  <img src="docs/screenshots/analytics-trends-breakdown.png" alt="Tren Konsultasi & Breakdown Status" width="100%"/>
+  <br/>
+  <i>Recharts AreaChart tren volume konsultasi harian & PieChart Donut status janji temu</i>
+</p>
+
+#### 🩺 Top 5 Dokter Teraktif & Agregat Diagnosa Medis Terbanyak
+| Top 5 Dokter Teraktif (BarChart) | Agregat Diagnosa Penyakit (Privasi DB) |
+| :---: | :---: |
+| <img src="docs/screenshots/analytics-top-doctors.png" alt="Top 5 Dokter Teraktif" width="100%"/> | <img src="docs/screenshots/analytics-diagnoses-aggregate.png" alt="Agregat Diagnosa Medis" width="100%"/> |
+| *Peringkat & jumlah sesi completed per dokter* | *Frekuensi penyakit anonim terkelompokkan murni di DB* |
 
 ---
 
