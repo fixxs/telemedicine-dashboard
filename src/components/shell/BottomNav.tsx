@@ -11,8 +11,8 @@ export function BottomNav() {
 
   const navItems = [
     { label: "Beranda", href: "/dashboard/pasien", icon: Home },
-    { label: "Janji Temu", href: "/dashboard/pasien#appointment", icon: Calendar, disabled: true },
-    { label: "Symptom AI", href: "/dashboard/pasien#symptom", icon: Activity, disabled: true },
+    { label: "Janji Temu", href: "/dashboard/pasien#appointments", icon: Calendar },
+    { label: "Symptom AI", href: "/dashboard/pasien#symptom-ai", icon: Activity },
     { label: "Profil", href: "/dashboard/pasien#profile", icon: User },
   ];
 
@@ -26,13 +26,12 @@ export function BottomNav() {
           return (
             <Link
               key={item.label}
-              href={item.disabled ? "#" : item.href}
+              href={item.href}
               className={cn(
                 "flex flex-col items-center justify-center flex-1 py-1 text-xs font-medium transition-colors",
                 isActive
                   ? "text-primary font-semibold"
-                  : "text-muted-foreground hover:text-foreground",
-                item.disabled && "opacity-40 cursor-not-allowed"
+                  : "text-muted-foreground hover:text-foreground"
               )}
             >
               <Icon className={cn("h-5 w-5 mb-1", isActive && "scale-110 transition-transform")} />

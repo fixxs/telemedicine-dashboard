@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { RoleShell } from "@/components/shell/RoleShell";
 import { DoctorScheduleForm } from "@/components/booking/DoctorScheduleForm";
 import { AppointmentList } from "@/components/booking/AppointmentList";
@@ -17,14 +18,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createManagedUserSchema, CreateManagedUserInput } from "@/lib/validations/auth";
 import { ShieldCheck, UserPlus, Users, Loader2, CheckCircle2, AlertCircle, Calendar, FileText, BarChart3 } from "lucide-react";
 
-export default function AdminDashboard() {
+function AdminDashboardContent() {
   const { data: user } = useCurrentUser();
   const { data: usersList, isLoading: loadingUsers, refetch } = useAdminUsers();
   const createManagedUserMutation = useCreateManagedUser();
 
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab") as "analytics" | "users" | "schedule" | "appointments" | "medical-records" | null;
+
   const [activeTab, setActiveTab] = useState<"analytics" | "users" | "schedule" | "appointments" | "medical-records">("analytics");
   const [showModal, setShowModal] = useState(false);
   const [serverMessage, setServerMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  useEffect(() => {
+    if (tabParam && ["analytics", "users", "schedule", "appointments", "medical-records"].includes(tabParam)) {
+      setActiveTab(tabParam);
+    }
+  }, [tabParam]);
 
   const {
     register,
@@ -70,7 +80,7 @@ export default function AdminDashboard() {
             <div className="flex items-center gap-2 mb-1">
               <Badge variant="admin">Admin System</Badge>
               <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded">
-                Phase 6 Active: Hospital Analytics & Agregat Medis
+                System Status: Phase 0-6 Complete & Production Active
               </span>
             </div>
             <h1 className="text-2xl font-bold tracking-tight">Panel Administrasi RS TeleMedika</h1>
@@ -85,7 +95,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Admin Navigation Tabs */}
-        <div className="flex border-b space-x-2 overflow-x-auto">
+        <div className="flex border-b border-border space-x-2 overflow-x-auto">
           <Button
             variant={activeTab === "analytics" ? "default" : "ghost"}
             size="sm"
@@ -172,9 +182,9 @@ export default function AdminDashboard() {
               ) : !usersList || usersList.length === 0 ? (
                 <div className="text-center py-8 text-sm text-muted-foreground">Belum ada pengguna.</div>
               ) : (
-                <div className="overflow-x-auto border rounded-lg">
+                <div className="overflow-x-auto border border-border rounded-lg">
                   <table className="w-full text-sm text-left">
-                    <thead className="bg-muted/50 text-xs font-semibold uppercase text-muted-foreground border-b">
+                    <thead className="bg-muted/50 text-xs font-semibold uppercase text-muted-foreground border-b border-border">
                       <tr>
                         <th className="px-4 py-3">Nama</th>
                         <th className="px-4 py-3">Email</th>
@@ -182,7 +192,7 @@ export default function AdminDashboard() {
                         <th className="px-4 py-3">Tanggal Dibuat</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y">
+                    <tbody className="divide-y divide-border">
                       {usersList.map((u: any) => (
                         <tr key={u._id} className="hover:bg-muted/30 transition-colors">
                           <td className="px-4 py-3 font-medium text-foreground">{u.name}</td>
@@ -215,7 +225,7 @@ export default function AdminDashboard() {
         {/* TAB 3: APPOINTMENT MONITORING */}
         {activeTab === "appointments" && <AppointmentList userRole="admin" />}
 
-        {/* TAB 4: MEDICAL RECORDS METADATA AUDIT (STATIC TABLE, NO DETAIL BUTTONS) */}
+        {/* TAB 4: MEDICAL RECORDS METADATA AUDIT */}
         {activeTab === "medical-records" && <MedicalRecordList role="admin" />}
 
         {/* Modal Create Dokter / Admin */}
@@ -278,7 +288,7 @@ export default function AdminDashboard() {
 
                   {selectedRole === "dokter" && (
                     <>
-                      <div className="space-y-1 pt-1 border-t">
+                      <div className="space-y-1 pt-1 border-t border-border">
                         <label className="text-xs font-semibold">Spesialisasi Dokter</label>
                         <Input
                           type="text"
@@ -301,7 +311,7 @@ export default function AdminDashboard() {
                   )}
                 </CardContent>
 
-                <div className="flex items-center justify-end gap-2 p-6 pt-2 border-t">
+                <div className="flex items-center justify-end gap-2 p-6 pt-2 border-t border-border">
                   <Button
                     type="button"
                     variant="outline"
@@ -327,5 +337,13 @@ export default function AdminDashboard() {
         )}
       </div>
     </RoleShell>
+  );
+}
+
+export default function AdminDashboard() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-sm text-muted-foreground">Memuat Admin Dashboard...</div>}>
+      <AdminDashboardContent />
+    </Suspense>
   );
 }

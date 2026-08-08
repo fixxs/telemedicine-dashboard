@@ -11,12 +11,11 @@ import { SymptomCheckHistory } from "@/components/symptom-checker/SymptomCheckHi
 import { AppointmentItem } from "@/hooks/useAppointments";
 import { MedicalRecordItem } from "@/hooks/useMedicalRecords";
 import { useVideoRoom } from "@/hooks/useVideoRoom";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { useCurrentUser } from "@/hooks/useAuth";
-import { Stethoscope, FileSpreadsheet, Loader2, AlertCircle, X, Sparkles } from "lucide-react";
+import { Stethoscope, Loader2, AlertCircle, X, Sparkles } from "lucide-react";
 
 export default function DokterDashboard() {
   const { data: user } = useCurrentUser();
@@ -89,12 +88,12 @@ export default function DokterDashboard() {
             <div className="flex items-center gap-2 mb-1">
               <Badge variant="dokter">Portal Dokter</Badge>
               <span className="text-xs text-teal-600 dark:text-teal-400 font-semibold bg-teal-500/10 px-2 py-0.5 rounded">
-                Phase 4 Active: Ref Skrining Gejala AI Pasien & Videocall
+                System Status: Phase 0-6 Complete & Active
               </span>
             </div>
             <h1 className="text-2xl font-bold tracking-tight">Selamat Datang, {user?.name}!</h1>
             <p className="text-sm text-muted-foreground">
-              Atur jadwal praktik Anda, gabung sesi videocall pasien, lihat referensi AI symptom check, dan isi rekam medis.
+              Kelola jadwal praktik mingguan, pantau janji temu, gabung videocall pasien, periksa referensi AI symptom check, dan terbitkan resep obat digital.
             </p>
           </div>
           <div className="h-12 w-12 rounded-xl bg-teal-500/20 text-teal-600 dark:text-teal-400 flex items-center justify-center font-bold shrink-0">
@@ -120,17 +119,23 @@ export default function DokterDashboard() {
         )}
 
         {/* Doctor Schedule Configuration Form */}
-        <DoctorScheduleForm />
+        <div id="schedule">
+          <DoctorScheduleForm />
+        </div>
 
         {/* Appointments List for Doctor */}
-        <AppointmentList
-          userRole="dokter"
-          onFillMedicalRecord={handleFillFromAppointment}
-          onJoinVideoCall={handleJoinVideoCall}
-        />
+        <div id="appointments">
+          <AppointmentList
+            userRole="dokter"
+            onFillMedicalRecord={handleFillFromAppointment}
+            onJoinVideoCall={handleJoinVideoCall}
+          />
+        </div>
 
-        {/* Doctor Medical Records List */}
-        <MedicalRecordList role="dokter" onEditRecord={handleEditRecord} />
+        {/* Doctor Medical Records & Prescriptions List */}
+        <div id="records">
+          <MedicalRecordList role="dokter" onEditRecord={handleEditRecord} />
+        </div>
 
         {/* Medical Record Form Modal */}
         {activeFormTarget && (
@@ -180,28 +185,6 @@ export default function DokterDashboard() {
             </div>
           </div>
         )}
-
-        {/* Future Phase Placeholders */}
-        <div className="pt-4 space-y-3">
-          <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Fitur Dokter Fase Mendatang</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Card className="border-border opacity-70">
-              <CardHeader className="p-4 pb-2">
-                <CardTitle className="text-sm font-medium flex items-center gap-2 text-muted-foreground">
-                  <FileSpreadsheet className="h-4 w-4" />
-                  Detail E-Resep Obat Resmi
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 pt-0">
-                <div className="text-base font-bold text-foreground">Resep Obat Terpisah</div>
-                <p className="text-xs text-muted-foreground mt-1">Modul rincian & dosis obat resmi pasien</p>
-                <span className="inline-block mt-3 text-[10px] bg-muted px-2 py-0.5 rounded font-medium text-muted-foreground">
-                  Tersedia di Phase 5
-                </span>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
       </div>
     </RoleShell>
   );

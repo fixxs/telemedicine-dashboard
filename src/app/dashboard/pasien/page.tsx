@@ -11,12 +11,11 @@ import { SymptomCheckHistory } from "@/components/symptom-checker/SymptomCheckHi
 import { getGeminiEngineLabel } from "@/lib/gemini-config";
 import { AppointmentItem } from "@/hooks/useAppointments";
 import { useVideoRoom } from "@/hooks/useVideoRoom";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { useCurrentUser } from "@/hooks/useAuth";
-import { HeartPulse, Sparkles, Activity, FileText, Loader2, AlertCircle } from "lucide-react";
+import { HeartPulse, Sparkles, Loader2, AlertCircle } from "lucide-react";
 
 export default function PasienDashboard() {
   const { data: user } = useCurrentUser();
@@ -62,19 +61,19 @@ export default function PasienDashboard() {
 
   return (
     <RoleShell allowedRole="pasien">
-      <div className="space-y-8 max-w-6xl mx-auto">
+      <div className="space-y-8 max-w-6xl mx-auto pb-12">
         {/* Welcome Header Banner */}
         <div className="bg-gradient-to-r from-sky-500/10 via-teal-500/10 to-primary/10 border border-sky-500/20 rounded-xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
               <Badge variant="pasien">Pasien RS TeleMedika</Badge>
               <span className="text-xs text-teal-600 dark:text-teal-400 font-semibold bg-teal-500/10 px-2 py-0.5 rounded">
-                Phase 4 Active: AI Symptom Checker ({getGeminiEngineLabel()})
+                System Status: Phase 0-6 Complete ({getGeminiEngineLabel()})
               </span>
             </div>
             <h1 className="text-2xl font-bold tracking-tight">Selamat Datang, {user?.name}!</h1>
             <p className="text-sm text-muted-foreground">
-              Portal kesehatan pribadi Anda. Layanan booking, rekam medis digital, videocall, dan AI Symptom Checker telah aktif.
+              Portal kesehatan pribadi Anda. Layanan booking, rekam medis, resep digital, videocall, dan AI Symptom Checker telah aktif.
             </p>
           </div>
 
@@ -109,21 +108,25 @@ export default function PasienDashboard() {
           </div>
         )}
 
-        {/* Phase 4 Active AI Symptom Checker History List */}
-        <SymptomCheckHistory role="pasien" onBookSpecialist={handleBookSpecialistFromAI} />
+        {/* AI Symptom Checker History List */}
+        <div id="symptom-ai">
+          <SymptomCheckHistory role="pasien" onBookSpecialist={handleBookSpecialistFromAI} />
+        </div>
 
-        {/* Phase 1 Booking Wizard Component */}
+        {/* Booking Wizard Component */}
         <div id="booking-wizard-section">
           <BookingWizard />
         </div>
 
-        {/* Phase 2 Patient Medical Records List */}
+        {/* Patient Medical Records & Prescriptions List */}
         <MedicalRecordList role="pasien" />
 
-        {/* Phase 1 & 3 Patient Appointment List with Video Call Trigger */}
-        <AppointmentList userRole="pasien" onJoinVideoCall={handleJoinVideoCall} />
+        {/* Patient Appointment List with Video Call Trigger */}
+        <div id="appointments">
+          <AppointmentList userRole="pasien" onJoinVideoCall={handleJoinVideoCall} />
+        </div>
 
-        {/* Phase 4 Interactive AI Symptom Checker Modal */}
+        {/* Interactive AI Symptom Checker Modal */}
         {isSymptomCheckerOpen && (
           <SymptomCheckerModal
             onClose={() => setIsSymptomCheckerOpen(false)}
@@ -131,7 +134,7 @@ export default function PasienDashboard() {
           />
         )}
 
-        {/* Phase 3 Embedded Video Call Modal */}
+        {/* Embedded Video Call Modal */}
         {activeCallSession && (
           <VideoCallModal
             serverUrl={activeCallSession.serverUrl}
@@ -142,28 +145,6 @@ export default function PasienDashboard() {
             onClose={() => setActiveCallSession(null)}
           />
         )}
-
-        {/* Future Phase Placeholders */}
-        <div className="pt-4 space-y-3">
-          <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Fitur Fase Mendatang</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Card className="border-border opacity-70">
-              <CardHeader className="p-4 pb-2">
-                <CardTitle className="text-sm font-medium flex items-center gap-2 text-muted-foreground">
-                  <FileText className="h-4 w-4" />
-                  Detail E-Resep Obat
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 pt-0">
-                <div className="text-base font-bold text-foreground">Sistem E-Resep Terpisah</div>
-                <p className="text-xs text-muted-foreground mt-1">Manajemen resep & tebus obat langsung</p>
-                <span className="inline-block mt-3 text-[10px] bg-muted px-2 py-0.5 rounded font-medium text-muted-foreground">
-                  Tersedia di Phase 5
-                </span>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
       </div>
     </RoleShell>
   );
