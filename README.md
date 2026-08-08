@@ -1,4 +1,4 @@
-# 🏥 Sistem Telemedicine Rumah Sakit + AI Symptom Checker
+#  Sistem Telemedicine Rumah Sakit + AI Symptom Checker
 
 **RS TeleMedika Digital** adalah aplikasi web telemedicine full-stack modern yang dirancang untuk menghubungkan **Pasien**, **Dokter**, dan **Admin Rumah Sakit** secara efisien, aman, dan terintegrasi.
 
@@ -6,7 +6,7 @@ Aplikasi ini dilengkapi dengan fitur skrining gejala kecerdasan buatan (**Google
 
 ---
 
-## ✨ Fitur Utama System (Phase 0 - Phase 6)
+##  Fitur Utama System (Phase 0 - Phase 6)
 
 1. **🔑 Authentication & Multi-Role Control (Phase 0)**
    - Sistem login & pendaftaran terpisah untuk Pasien, Dokter, dan Admin.
