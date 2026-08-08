@@ -133,8 +133,12 @@ Sesi konsultasi tatap muka dokter & pasien langsung di browser:
 ---
 
 ### 4. 💊 Form EMR Medis, Resep Digital & Laporan PDF
-Pengisian diagnosis klinis oleh dokter, resep obat multi-item, dan pengunduhan PDF ber-Kop RS:
-*(Screenshot modul resep & PDF akan ditambahkan di sini)*
+Pengisian diagnosis klinis & tanda vital oleh dokter, penerbitan resep obat digital multi-item, dan pengunduhan PDF ber-Kop RS TeleMedika Digital:
+
+| Form EMR & Tanda Vital Dokter | Kartu Resep Obat Digital Resmi | Dokumen Resmi Laporan PDF |
+| :---: | :---: | :---: |
+| <img src="docs/screenshots/emr-form-doctor.png" alt="Form EMR & Tanda Vital Dokter" width="220"/> | <img src="docs/screenshots/prescription-view-card.png" alt="Kartu Resep Obat Digital" width="100%"/> | <img src="docs/screenshots/medical-report-pdf-official.png" alt="Dokumen Resmi Laporan PDF" width="100%"/> |
+| *Input diagnosis, keluhan & tanda vital* | *Kartu rincian obat & tombol unduh PDF* | *Hasil cetak PDF laporan resmi ber-Kop RS* |
 
 ---
 
