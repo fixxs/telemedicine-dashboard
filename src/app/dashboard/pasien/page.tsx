@@ -6,17 +6,23 @@ import { BookingWizard } from "@/components/booking/BookingWizard";
 import { AppointmentList } from "@/components/booking/AppointmentList";
 import { MedicalRecordList } from "@/components/medical-record/MedicalRecordList";
 import { VideoCallModal } from "@/components/video/VideoCallModal";
+import { SymptomCheckerModal } from "@/components/symptom-checker/SymptomCheckerModal";
+import { SymptomCheckHistory } from "@/components/symptom-checker/SymptomCheckHistory";
+import { getGeminiEngineLabel } from "@/lib/gemini-config";
 import { AppointmentItem } from "@/hooks/useAppointments";
 import { useVideoRoom } from "@/hooks/useVideoRoom";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { useCurrentUser } from "@/hooks/useAuth";
-import { HeartPulse, Video, Activity, FileText, Loader2, AlertCircle } from "lucide-react";
+import { HeartPulse, Sparkles, Activity, FileText, Loader2, AlertCircle } from "lucide-react";
 
 export default function PasienDashboard() {
   const { data: user } = useCurrentUser();
   const { joinVideoCall, isJoining } = useVideoRoom();
+
+  const [isSymptomCheckerOpen, setIsSymptomCheckerOpen] = useState(false);
 
   const [activeCallSession, setActiveCallSession] = useState<{
     serverUrl?: string;
@@ -46,6 +52,14 @@ export default function PasienDashboard() {
     }
   };
 
+  const handleBookSpecialistFromAI = (specialization: string) => {
+    // Scroll smoothly to booking wizard
+    const bookingSection = document.getElementById("booking-wizard-section");
+    if (bookingSection) {
+      bookingSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <RoleShell allowedRole="pasien">
       <div className="space-y-8 max-w-6xl mx-auto">
@@ -54,17 +68,27 @@ export default function PasienDashboard() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <Badge variant="pasien">Pasien RS TeleMedika</Badge>
-              <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded">
-                Phase 3 Active: Videocall LiveKit Cloud
+              <span className="text-xs text-teal-600 dark:text-teal-400 font-semibold bg-teal-500/10 px-2 py-0.5 rounded">
+                Phase 4 Active: AI Symptom Checker ({getGeminiEngineLabel()})
               </span>
             </div>
             <h1 className="text-2xl font-bold tracking-tight">Selamat Datang, {user?.name}!</h1>
             <p className="text-sm text-muted-foreground">
-              Portal kesehatan pribadi Anda. Layanan booking, rekam medis digital, dan videocall telemedicine telah aktif.
+              Portal kesehatan pribadi Anda. Layanan booking, rekam medis digital, videocall, dan AI Symptom Checker telah aktif.
             </p>
           </div>
-          <div className="h-12 w-12 rounded-xl bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold shrink-0">
-            <HeartPulse className="h-7 w-7" />
+
+          <div className="flex items-center gap-3">
+            <Button
+              onClick={() => setIsSymptomCheckerOpen(true)}
+              className="bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-bold gap-2 text-xs sm:text-sm py-2.5 px-4 shadow-lg shadow-teal-500/20"
+            >
+              <Sparkles className="h-4 w-4" />
+              Cek Gejala AI
+            </Button>
+            <div className="h-12 w-12 rounded-xl bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold shrink-0">
+              <HeartPulse className="h-7 w-7" />
+            </div>
           </div>
         </div>
 
@@ -85,14 +109,27 @@ export default function PasienDashboard() {
           </div>
         )}
 
+        {/* Phase 4 Active AI Symptom Checker History List */}
+        <SymptomCheckHistory role="pasien" onBookSpecialist={handleBookSpecialistFromAI} />
+
         {/* Phase 1 Booking Wizard Component */}
-        <BookingWizard />
+        <div id="booking-wizard-section">
+          <BookingWizard />
+        </div>
 
         {/* Phase 2 Patient Medical Records List */}
         <MedicalRecordList role="pasien" />
 
         {/* Phase 1 & 3 Patient Appointment List with Video Call Trigger */}
         <AppointmentList userRole="pasien" onJoinVideoCall={handleJoinVideoCall} />
+
+        {/* Phase 4 Interactive AI Symptom Checker Modal */}
+        {isSymptomCheckerOpen && (
+          <SymptomCheckerModal
+            onClose={() => setIsSymptomCheckerOpen(false)}
+            onBookSpecialist={handleBookSpecialistFromAI}
+          />
+        )}
 
         {/* Phase 3 Embedded Video Call Modal */}
         {activeCallSession && (
@@ -110,22 +147,6 @@ export default function PasienDashboard() {
         <div className="pt-4 space-y-3">
           <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Fitur Fase Mendatang</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Card className="border-border opacity-70">
-              <CardHeader className="p-4 pb-2">
-                <CardTitle className="text-sm font-medium flex items-center gap-2 text-muted-foreground">
-                  <Activity className="h-4 w-4" />
-                  AI Symptom Checker
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 pt-0">
-                <div className="text-base font-bold text-foreground">Diagnosis Awal AI</div>
-                <p className="text-xs text-muted-foreground mt-1">Skrining mandiri gejala awal sebelum konsultasi</p>
-                <span className="inline-block mt-3 text-[10px] bg-muted px-2 py-0.5 rounded font-medium text-muted-foreground">
-                  Tersedia di Phase 4
-                </span>
-              </CardContent>
-            </Card>
-
             <Card className="border-border opacity-70">
               <CardHeader className="p-4 pb-2">
                 <CardTitle className="text-sm font-medium flex items-center gap-2 text-muted-foreground">

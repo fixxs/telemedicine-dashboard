@@ -5,6 +5,7 @@ import { RoleShell } from "@/components/shell/RoleShell";
 import { DoctorScheduleForm } from "@/components/booking/DoctorScheduleForm";
 import { AppointmentList } from "@/components/booking/AppointmentList";
 import { MedicalRecordList } from "@/components/medical-record/MedicalRecordList";
+import { AdminAnalyticsDashboard } from "@/components/analytics/AdminAnalyticsDashboard";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,14 +15,14 @@ import { useCurrentUser, useCreateManagedUser, useAdminUsers } from "@/hooks/use
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createManagedUserSchema, CreateManagedUserInput } from "@/lib/validations/auth";
-import { ShieldCheck, UserPlus, Users, Loader2, CheckCircle2, AlertCircle, Calendar, FileText } from "lucide-react";
+import { ShieldCheck, UserPlus, Users, Loader2, CheckCircle2, AlertCircle, Calendar, FileText, BarChart3 } from "lucide-react";
 
 export default function AdminDashboard() {
   const { data: user } = useCurrentUser();
   const { data: usersList, isLoading: loadingUsers, refetch } = useAdminUsers();
   const createManagedUserMutation = useCreateManagedUser();
 
-  const [activeTab, setActiveTab] = useState<"users" | "schedule" | "appointments" | "medical-records">("users");
+  const [activeTab, setActiveTab] = useState<"analytics" | "users" | "schedule" | "appointments" | "medical-records">("analytics");
   const [showModal, setShowModal] = useState(false);
   const [serverMessage, setServerMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
@@ -69,12 +70,12 @@ export default function AdminDashboard() {
             <div className="flex items-center gap-2 mb-1">
               <Badge variant="admin">Admin System</Badge>
               <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded">
-                Phase 2 Active: Audit Metadata Medis
+                Phase 6 Active: Hospital Analytics & Agregat Medis
               </span>
             </div>
             <h1 className="text-2xl font-bold tracking-tight">Panel Administrasi RS TeleMedika</h1>
             <p className="text-sm text-muted-foreground">
-              Manajemen akun pengguna, kelola jadwal dokter, monitoring janji temu, dan audit metadata rekam medis.
+              Dashboard analytics operasional rumah sakit, kelola pengguna, jadwal dokter, dan monitoring janji temu.
             </p>
           </div>
           <Button onClick={() => setShowModal(true)} className="gap-2 shrink-0 font-semibold">
@@ -85,6 +86,15 @@ export default function AdminDashboard() {
 
         {/* Admin Navigation Tabs */}
         <div className="flex border-b space-x-2 overflow-x-auto">
+          <Button
+            variant={activeTab === "analytics" ? "default" : "ghost"}
+            size="sm"
+            onClick={() => setActiveTab("analytics")}
+            className="gap-2 text-xs font-semibold rounded-b-none border-b-2 border-transparent"
+          >
+            <BarChart3 className="h-4 w-4" />
+            Dashboard Analytics Hospital
+          </Button>
           <Button
             variant={activeTab === "users" ? "default" : "ghost"}
             size="sm"
@@ -131,6 +141,9 @@ export default function AdminDashboard() {
             <AlertDescription>{serverMessage.text}</AlertDescription>
           </Alert>
         )}
+
+        {/* TAB 0: HOSPITAL ANALYTICS DASHBOARD (DEFAULT ACTIVE TAB) */}
+        {activeTab === "analytics" && <AdminAnalyticsDashboard />}
 
         {/* TAB 1: USERS LIST */}
         {activeTab === "users" && (

@@ -1,7 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useMedicalRecordDetail } from "@/hooks/useMedicalRecords";
+import { PrescriptionViewCard } from "@/components/prescription/PrescriptionViewCard";
+import { PrescriptionFormModal } from "@/components/prescription/PrescriptionFormModal";
+import { DownloadReportButton } from "@/components/pdf/DownloadReportButton";
+import { useCurrentUser } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
@@ -13,11 +17,16 @@ interface MedicalRecordDetailModalProps {
 }
 
 export function MedicalRecordDetailModal({ recordId, onClose }: MedicalRecordDetailModalProps) {
+  const { data: user } = useCurrentUser();
   const { data: record, isLoading, error } = useMedicalRecordDetail(recordId);
+
+  const [isPrescriptionFormOpen, setIsPrescriptionFormOpen] = useState(false);
+
+  const userRole = (user?.role as "pasien" | "dokter" | "admin") || "pasien";
 
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-      <div className="bg-card text-card-foreground border border-border rounded-xl shadow-2xl w-full max-w-xl overflow-hidden animate-in fade-in zoom-in-95 duration-150 my-8">
+      <div className="bg-card text-card-foreground border border-border rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150 my-8">
         {/* Modal Header */}
         <div className="flex items-center justify-between p-4 border-b bg-muted/30">
           <div className="flex items-center gap-2">
@@ -34,9 +43,19 @@ export function MedicalRecordDetailModal({ recordId, onClose }: MedicalRecordDet
               <p className="text-xs text-muted-foreground">ID Rekam Medis: <span className="font-mono text-foreground">{recordId}</span></p>
             </div>
           </div>
-          <Button variant="ghost" size="sm" onClick={onClose} className="h-8 w-8 p-0">
-            <X className="h-4 w-4" />
-          </Button>
+
+          <div className="flex items-center gap-2">
+            {record && userRole !== "admin" && (
+              <DownloadReportButton
+                medicalRecordId={recordId}
+                patientName={record.patient?.name}
+              />
+            )}
+
+            <Button variant="ghost" size="sm" onClick={onClose} className="h-8 w-8 p-0">
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
 
         {/* Modal Body */}
@@ -152,16 +171,44 @@ export function MedicalRecordDetailModal({ recordId, onClose }: MedicalRecordDet
                   </div>
                 </div>
               )}
+
+              {/* Resep Digital Section */}
+              <div className="pt-2">
+                <PrescriptionViewCard
+                  medicalRecordId={recordId}
+                  patientName={record.patient?.name}
+                  role={userRole === "dokter" ? "dokter" : "pasien"}
+                  onEditPrescription={() => setIsPrescriptionFormOpen(true)}
+                />
+              </div>
             </>
           )}
         </div>
 
         {/* Modal Footer */}
-        <div className="p-4 border-t bg-muted/30 flex justify-end">
-          <Button variant="outline" size="sm" onClick={onClose} className="text-xs">
+        <div className="p-4 border-t bg-muted/30 flex items-center justify-between">
+          {record && userRole !== "admin" && (
+            <DownloadReportButton
+              medicalRecordId={recordId}
+              patientName={record.patient?.name}
+              variant="default"
+              className="bg-teal-600 hover:bg-teal-700 text-white"
+            />
+          )}
+
+          <Button variant="outline" size="sm" onClick={onClose} className="text-xs ml-auto">
             Tutup
           </Button>
         </div>
+
+        {/* Doctor Prescription Form Modal */}
+        {isPrescriptionFormOpen && record && (
+          <PrescriptionFormModal
+            medicalRecordId={recordId}
+            patientName={record.patient?.name || "Pasien"}
+            onClose={() => setIsPrescriptionFormOpen(false)}
+          />
+        )}
       </div>
     </div>
   );

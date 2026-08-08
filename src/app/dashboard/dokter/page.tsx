@@ -7,14 +7,16 @@ import { AppointmentList } from "@/components/booking/AppointmentList";
 import { MedicalRecordList } from "@/components/medical-record/MedicalRecordList";
 import { MedicalRecordForm } from "@/components/medical-record/MedicalRecordForm";
 import { VideoCallModal } from "@/components/video/VideoCallModal";
+import { SymptomCheckHistory } from "@/components/symptom-checker/SymptomCheckHistory";
 import { AppointmentItem } from "@/hooks/useAppointments";
 import { MedicalRecordItem } from "@/hooks/useMedicalRecords";
 import { useVideoRoom } from "@/hooks/useVideoRoom";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { useCurrentUser } from "@/hooks/useAuth";
-import { Stethoscope, Video, FileSpreadsheet, Loader2, AlertCircle } from "lucide-react";
+import { Stethoscope, FileSpreadsheet, Loader2, AlertCircle, X, Sparkles } from "lucide-react";
 
 export default function DokterDashboard() {
   const { data: user } = useCurrentUser();
@@ -34,6 +36,12 @@ export default function DokterDashboard() {
     roomName?: string;
     patientName?: string;
     doctorName?: string;
+  } | null>(null);
+
+  // State for inspecting patient AI symptom check reference
+  const [inspectSymptomCheckTarget, setInspectSymptomCheckTarget] = useState<{
+    patientId: string;
+    patientName: string;
   } | null>(null);
 
   const [callError, setCallError] = useState<string | null>(null);
@@ -80,13 +88,13 @@ export default function DokterDashboard() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <Badge variant="dokter">Portal Dokter</Badge>
-              <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded">
-                Phase 3 Active: Videocall LiveKit Cloud & Rekam Medis
+              <span className="text-xs text-teal-600 dark:text-teal-400 font-semibold bg-teal-500/10 px-2 py-0.5 rounded">
+                Phase 4 Active: Ref Skrining Gejala AI Pasien & Videocall
               </span>
             </div>
             <h1 className="text-2xl font-bold tracking-tight">Selamat Datang, {user?.name}!</h1>
             <p className="text-sm text-muted-foreground">
-              Atur jadwal praktik Anda, gabung sesi videocall pasien, dan isi rekam medis pasien setelah konsultasi.
+              Atur jadwal praktik Anda, gabung sesi videocall pasien, lihat referensi AI symptom check, dan isi rekam medis.
             </p>
           </div>
           <div className="h-12 w-12 rounded-xl bg-teal-500/20 text-teal-600 dark:text-teal-400 flex items-center justify-center font-bold shrink-0">
@@ -114,7 +122,7 @@ export default function DokterDashboard() {
         {/* Doctor Schedule Configuration Form */}
         <DoctorScheduleForm />
 
-        {/* Appointments List for Doctor (With Video Call & Fill Medical Record triggers) */}
+        {/* Appointments List for Doctor */}
         <AppointmentList
           userRole="dokter"
           onFillMedicalRecord={handleFillFromAppointment}
@@ -144,6 +152,33 @@ export default function DokterDashboard() {
             doctorName={activeCallSession.doctorName}
             onClose={() => setActiveCallSession(null)}
           />
+        )}
+
+        {/* Doctor Patient Symptom Check Inspection Modal */}
+        {inspectSymptomCheckTarget && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+            <div className="w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-card rounded-2xl p-4 sm:p-6 space-y-4">
+              <div className="flex items-center justify-between border-b border-border pb-3">
+                <h3 className="text-base font-bold text-foreground flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-teal-500" />
+                  Referensi Skrining AI: {inspectSymptomCheckTarget.patientName}
+                </h3>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setInspectSymptomCheckTarget(null)}
+                  className="h-8 w-8"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+
+              <SymptomCheckHistory
+                role="dokter"
+                patientId={inspectSymptomCheckTarget.patientId}
+              />
+            </div>
+          </div>
         )}
 
         {/* Future Phase Placeholders */}
