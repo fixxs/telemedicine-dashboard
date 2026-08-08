@@ -1,4 +1,4 @@
-#  Sistem Telemedicine Rumah Sakit + AI Symptom Checker
+# 🏥 Sistem Telemedicine Rumah Sakit + AI Symptom Checker
 
 **RS TeleMedika Digital** adalah aplikasi web telemedicine full-stack modern yang dirancang untuk menghubungkan **Pasien**, **Dokter**, dan **Admin Rumah Sakit** secara efisien, aman, dan terintegrasi.
 
@@ -6,7 +6,7 @@ Aplikasi ini dilengkapi dengan fitur skrining gejala kecerdasan buatan (**Google
 
 ---
 
-##  Fitur Utama System (Phase 0 - Phase 6)
+## ✨ Fitur Utama System (Phase 0 - Phase 6)
 
 1. **🔑 Authentication & Multi-Role Control (Phase 0)**
    - Sistem login & pendaftaran terpisah untuk Pasien, Dokter, dan Admin.
@@ -100,12 +100,19 @@ Buka browser Anda dan akses aplikasi di: **`http://localhost:3000`**.
 Berikut adalah galeri tampilan antarmuka (UI) dari berbagai modul utama RS TeleMedika Digital:
 
 ### 1. 📅 Dashboard Pasien & Booking Wizard (Janji Temu 3-Langkah)
-Portal pemesanan janji temu telemedicine interaktif 3-langkah bagi pasien dengan filter spesialisasi dokter:
+Portal pemesanan janji temu telemedicine interaktif 3-langkah bagi pasien dengan dukungan tampilan **Desktop** & **Mobile** responsif:
 
+#### 💻 Desktop View
 | Step 1: Filter & Pilih Dokter | Step 2: Pilih Tanggal & Jam Praktik | Step 3: Konfirmasi Booking |
 | :---: | :---: | :---: |
-| <img src="docs/screenshots/booking-step1-select-doctor.png" alt="Step 1 Pilih Dokter" width="100%"/> | <img src="docs/screenshots/booking-step2-select-schedule.png" alt="Step 2 Pilih Jam Praktik" width="100%"/> | <img src="docs/screenshots/booking-step3-confirmation.png" alt="Step 3 Konfirmasi Booking" width="100%"/> |
+| <img src="docs/screenshots/booking-step1-select-doctor.png" alt="Step 1 Desktop" width="100%"/> | <img src="docs/screenshots/booking-step2-select-schedule.png" alt="Step 2 Desktop" width="100%"/> | <img src="docs/screenshots/booking-step3-confirmation.png" alt="Step 3 Desktop" width="100%"/> |
 | *Filter spesialisasi & daftar dokter* | *Slot jam real-time & kalender* | *Status pending & detail rincian* |
+
+#### 📱 Mobile View
+| Step 1: Pilih Dokter (Mobile) | Step 2: Jam Praktik (Mobile) | Step 3: Konfirmasi (Mobile) |
+| :---: | :---: | :---: |
+| <img src="docs/screenshots/booking-step1-mobile.png" alt="Step 1 Mobile" width="220"/> | <img src="docs/screenshots/booking-step2-mobile.png" alt="Step 2 Mobile" width="220"/> | <img src="docs/screenshots/booking-step3-mobile.png" alt="Step 3 Mobile" width="220"/> |
+| *Navigasi bawah & daftar dokter* | *Grid jam responsif seluler* | *Rincian booking seluler* |
 
 ---
 
