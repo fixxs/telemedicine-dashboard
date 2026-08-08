@@ -14,7 +14,7 @@
   - Rekam medis elektronik (EMR) dengan prinsip privasi medis absolut (**Admin Ditolak / 403 Forbidden**).
   - Video Call konsultasi WebRTC langsung di browser via **LiveKit Cloud**.
   - Skrining gejala awal bertenaga AI dengan **Google Gemini API** (`gemini-3.5-flash`) yang dilengkapi deteksi bahaya medis (*Red-Flag Detector*).
-  - Resep obat digital dan laporan rekam medis berformat PDF yang di-generate langsung di sisi server (*Server-Side PDF Buffer Stream*).
+  - Resep obat digital dan laporan rekam medis berformat PDF yang di generate langsung di sisi server (*Server-Side PDF Buffer Stream*).
   - Dashboard Analitik Operasional Rumah Sakit berbasis grafik responsif (**Recharts**) dengan agregasi murni di level database tanpa memaparkan identitas pasien.
 
 ---
