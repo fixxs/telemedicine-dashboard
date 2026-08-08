@@ -143,7 +143,7 @@ Visualisasi tren operasional rumah sakit khusus Admin berbasis grafik responsif 
 
 #### 🏆 Header Overview & Kartu Indikator Utama
 <p align="center">
-  <img src="docs/screenshots/analytics-admin-overview.png" alt="Header & Ringkasan Metrik Admin" width="100%"/>
+  <img src="docs/screenshots/admin-analytics-dashboard.png" alt="Header & Ringkasan Metrik Admin" width="100%"/>
   <br/>
   <i>Kartu indikator angka utama (Total Pasien, Total Dokter, Total Sesi Konsultasi, & Skrining AI)</i>
 </p>
