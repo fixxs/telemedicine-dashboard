@@ -1,4 +1,4 @@
-# 🏥 Sistem Telemedicine Rumah Sakit + AI Symptom Checker
+#  Sistem Telemedicine Rumah Sakit + AI Symptom Checker
 
 **RS TeleMedika Digital** adalah aplikasi web telemedicine full-stack modern yang dirancang untuk menghubungkan **Pasien**, **Dokter**, dan **Admin Rumah Sakit** secara efisien, aman, dan terintegrasi.
 
@@ -6,17 +6,17 @@ Aplikasi ini dilengkapi dengan fitur skrining gejala kecerdasan buatan (**Google
 
 ---
 
-## ✨ Fitur Utama System (Phase 0 - Phase 6)
+##  Fitur Utama System (Phase 0 - Phase 6)
 
-1. **🔑 Authentication & Multi-Role Control (Phase 0)**
+1. ** Authentication & Multi-Role Control (Phase 0)**
    - Sistem login & pendaftaran terpisah untuk Pasien, Dokter, dan Admin.
    - Sesi aman berbasis JSON Web Token (JWT) yang disimpan di HttpOnly Cookie.
 
-2. **📅 Doctor Booking Wizard & Schedule Management (Phase 1)**
+2. ** Doctor Booking Wizard & Schedule Management (Phase 1)**
    - Alur pemesanan konsultasi 3-langkah bagi pasien (Pilih Dokter ➔ Pilih Tanggal & Slot Jam ➔ Konfirmasi).
    - Pengaturan jadwal praktik mingguan oleh dokter/admin dan kalkulasi slot bebas real-time.
 
-3. **🩺 Rekam Medis Elektronik (EMR) & Privasi Medis Ketat (Phase 2)**
+3. ** Rekam Medis Elektronik (EMR) & Privasi Medis Ketat (Phase 2)**
    - Pencatatan keluhan, diagnosis, catatan medis, dan tanda vital (TD, Suhu, Nadi, BB).
    - **Garansi Privasi Medis**: Admin **DITOLAK (HTTP 403 Forbidden)** mengakses rekam medis pasien individual. Setiap percobaan dicatat ke `AuditLog`.
 
@@ -24,21 +24,21 @@ Aplikasi ini dilengkapi dengan fitur skrining gejala kecerdasan buatan (**Google
    - Sesi konsultasi tatap muka online WebRTC langsung di browser via **LiveKit Cloud**.
    - Dilengkapi penjaminan token akses otomatis dan bar kontrol media (Mic, Kamera, Screen Share).
 
-5. **🤖 AI Symptom Checker & Emergency Triage (Phase 4)**
+5. ** AI Symptom Checker & Emergency Triage (Phase 4)**
    - Analisis gejala mandiri pasien bertenaga AI **Google Gemini API** (`gemini-3.5-flash`).
    - Deteksi bahaya medis (*Red-Flag Alert Box*) jika indikasi darurat terdeteksi, lengkap dengan rekomendasi dokter spesialis.
 
-6. **💊 Resep Digital & Laporan PDF Medis (Phase 5)**
+6. ** Resep Digital & Laporan PDF Medis (Phase 5)**
    - Penulisan resep obat multi-item oleh dokter (`CREATE_PRESCRIPTION` & `UPDATE_PRESCRIPTION`).
    - Generasi & *downloading* Laporan Rekam Medis ber-Kop RS TeleMedika dalam format PDF secara *server-side buffer stream* (`@react-pdf/renderer`).
 
-7. **📊 Dashboard Analytics Rumah Sakit (Phase 6)**
+7. ** Dashboard Analytics Rumah Sakit (Phase 6)**
    - Visualisasi tren operasional rumah sakit khusus Admin berbasis grafik responsif (**Recharts**).
    - Agregasi statistik diagnosa murni dilakukan di level MongoDB (`$group`) tanpa memaparkan identitas pribadi pasien (Zero Patient PII Leakage).
 
 ---
 
-## 🛠️ Stack Teknis
+##  Stack Teknis
 
 - **Frontend & App Framework**: [Next.js 14](https://nextjs.org/) (App Router, Server Components, Route Handlers)
 - **UI & Styling**: React 18, Tailwind CSS, Lucide React Icons, Radix UI Primitives
@@ -53,7 +53,7 @@ Aplikasi ini dilengkapi dengan fitur skrining gejala kecerdasan buatan (**Google
 
 ---
 
-## 🚀 Cara Menjalankan Project Secara Lokal
+##  Cara Menjalankan Project Secara Lokal
 
 ### 1. Prasyarat System
 - Node.js versi 18.x atau 20.x atau lebih baru
@@ -99,16 +99,16 @@ Buka browser Anda dan akses aplikasi di: **`http://localhost:3000`**.
 
 Berikut adalah galeri tampilan antarmuka (UI) dari berbagai modul utama RS TeleMedika Digital:
 
-### 1. 📅 Dashboard Pasien & Booking Wizard (Janji Temu 3-Langkah)
+### 1.  Dashboard Pasien & Booking Wizard (Janji Temu 3-Langkah)
 Portal pemesanan janji temu telemedicine interaktif 3-langkah bagi pasien dengan dukungan tampilan **Desktop** & **Mobile** responsif:
 
-#### 💻 Desktop View
+####  Desktop View
 | Step 1: Filter & Pilih Dokter | Step 2: Pilih Tanggal & Jam Praktik | Step 3: Konfirmasi Booking |
 | :---: | :---: | :---: |
 | <img src="docs/screenshots/booking-step1-select-doctor.png" alt="Step 1 Desktop" width="100%"/> | <img src="docs/screenshots/booking-step2-select-schedule.png" alt="Step 2 Desktop" width="100%"/> | <img src="docs/screenshots/booking-step3-confirmation.png" alt="Step 3 Desktop" width="100%"/> |
 | *Filter spesialisasi & daftar dokter* | *Slot jam real-time & kalender* | *Status pending & detail rincian* |
 
-#### 📱 Mobile View
+####  Mobile View
 | Step 1: Pilih Dokter (Mobile) | Step 2: Jam Praktik (Mobile) | Step 3: Konfirmasi (Mobile) |
 | :---: | :---: | :---: |
 | <img src="docs/screenshots/booking-step1-mobile.png" alt="Step 1 Mobile" width="220"/> | <img src="docs/screenshots/booking-step2-mobile.png" alt="Step 2 Mobile" width="220"/> | <img src="docs/screenshots/booking-step3-mobile.png" alt="Step 3 Mobile" width="220"/> |
@@ -116,7 +116,7 @@ Portal pemesanan janji temu telemedicine interaktif 3-langkah bagi pasien dengan
 
 ---
 
-### 2. 🤖 AI Symptom Checker & Emergency Triage
+### 2.  AI Symptom Checker & Emergency Triage
 Analisis gejala mandiri pasien bertenaga AI **Google Gemini 3.5** (`gemini-3.5-flash`) dengan triase otomatis & deteksi Red-Flag Emergency:
 
 | Form Input & Keparahan | Ringkasan Skrining & Indikasi | Rekomendasi Dokter Spesialis |
@@ -126,7 +126,7 @@ Analisis gejala mandiri pasien bertenaga AI **Google Gemini 3.5** (`gemini-3.5-f
 
 ---
 
-### 3. 📹 Ruang Konsultasi Video Call WebRTC (LiveKit Cloud)
+### 3.  Ruang Konsultasi Video Call WebRTC (LiveKit Cloud)
 Sesi konsultasi tatap muka online WebRTC langsung di browser via **LiveKit Cloud** dengan enkripsi HIPAA compliant & kontrol media lengkap:
 
 | Tampilan Kamar Konsultasi Virtual | Sesi Video Call 2-Arah (Pasien & Dokter) |
@@ -136,7 +136,7 @@ Sesi konsultasi tatap muka online WebRTC langsung di browser via **LiveKit Cloud
 
 ---
 
-### 4. 💊 Form EMR Medis, Resep Digital & Laporan PDF
+### 4.  Form EMR Medis, Resep Digital & Laporan PDF
 Pengisian diagnosis klinis & tanda vital oleh dokter, penerbitan resep obat digital multi-item, dan pengunduhan PDF ber-Kop RS TeleMedika Digital:
 
 | Form EMR & Tanda Vital Dokter | Kartu Resep Obat Digital Resmi | Dokumen Resmi Laporan PDF |
@@ -146,24 +146,24 @@ Pengisian diagnosis klinis & tanda vital oleh dokter, penerbitan resep obat digi
 
 ---
 
-### 5. 📊 Dashboard Analytics Hospital Admin (Recharts)
+### 5.  Dashboard Analytics Hospital Admin (Recharts)
 Visualisasi tren operasional rumah sakit khusus Admin berbasis grafik responsif (**Recharts**) dengan agregasi DB Sisi Server (Zero Patient PII):
 
-#### 🏆 Header Overview & Kartu Indikator Utama
+####  Header Overview & Kartu Indikator Utama
 <p align="center">
   <img src="docs/screenshots/admin-analytics-dashboard.png" alt="Header & Ringkasan Metrik Admin" width="100%"/>
   <br/>
   <i>Kartu indikator angka utama (Total Pasien, Total Dokter, Total Sesi Konsultasi, & Skrining AI)</i>
 </p>
 
-#### 📈 Tren Konsultasi & Breakdown Status Janji Temu
+####  Tren Konsultasi & Breakdown Status Janji Temu
 <p align="center">
   <img src="docs/screenshots/analytics-trends-breakdown.png" alt="Tren Konsultasi & Breakdown Status" width="100%"/>
   <br/>
   <i>Recharts AreaChart tren volume konsultasi harian & PieChart Donut status janji temu</i>
 </p>
 
-#### 🩺 Top 5 Dokter Teraktif & Agregat Diagnosa Medis Terbanyak
+####  Top 5 Dokter Teraktif & Agregat Diagnosa Medis Terbanyak
 | Top 5 Dokter Teraktif (BarChart) | Agregat Diagnosa Penyakit (Privasi DB) |
 | :---: | :---: |
 | <img src="docs/screenshots/analytics-top-doctors.png" alt="Top 5 Dokter Teraktif" width="100%"/> | <img src="docs/screenshots/analytics-diagnoses-aggregate.png" alt="Agregat Diagnosa Medis" width="100%"/> |
@@ -171,12 +171,12 @@ Visualisasi tren operasional rumah sakit khusus Admin berbasis grafik responsif 
 
 ---
 
-## 📖 Dokumentasi Lengkap & Arsitektur
+##  Dokumentasi Lengkap & Arsitektur
 
 Untuk rincian arsitektur teknis, skema database, daftar lengkap endpoint API, dan log verifikasi build tiap phase, silakan baca dokumentasi utama di file [`PROJECT_SUMMARY.md`](./PROJECT_SUMMARY.md).
 
 ---
 
-## 📄 Lisensi
+##  Lisensi
 
 Project ini dikembangkan untuk keperluan sistem telemedicine rumah sakit berbasis standar privasi medis modern.
