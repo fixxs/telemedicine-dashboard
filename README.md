@@ -127,8 +127,12 @@ Analisis gejala mandiri pasien bertenaga AI **Google Gemini 3.5** (`gemini-3.5-f
 ---
 
 ### 3. 📹 Ruang Konsultasi Video Call WebRTC (LiveKit Cloud)
-Sesi konsultasi tatap muka dokter & pasien langsung di browser:
-*(Screenshot modul video call akan ditambahkan di sini)*
+Sesi konsultasi tatap muka online WebRTC langsung di browser via **LiveKit Cloud** dengan enkripsi HIPAA compliant & kontrol media lengkap:
+
+| Tampilan Kamar Konsultasi Virtual | Sesi Video Call 2-Arah (Pasien & Dokter) |
+| :---: | :---: |
+| <img src="docs/screenshots/videocall-doctor-session.png" alt="Sesi Konsultasi Virtual LiveKit" width="100%"/> | <img src="docs/screenshots/videocall-patient-doctor-room.png" alt="Sesi Video Call 2-Arah" width="100%"/> |
+| *Antarmuka room virtual & bar kontrol media (Mic, Camera, Share Screen, Chat)* | *Interaksi video call real-time 2-arah antara pasien dan dokter* |
 
 ---
 
