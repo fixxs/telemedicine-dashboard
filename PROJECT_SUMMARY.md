@@ -1,10 +1,10 @@
-# 🏥 Dokumentasi Final Project: Sistem Telemedicine Rumah Sakit + AI Symptom Checker
+#  Dokumentasi Final Project: Sistem Telemedicine Rumah Sakit + AI Symptom Checker
 
 **RS TeleMedika Digital** — Platform Layanan Kesehatan Terpadu Berbasis Web, kecerdasan buatan (AI Triage), video call konsul langsung, dan analitik operasional rumah sakit.
 
 ---
 
-## 1. 📌 Ringkasan Project
+## 1.  Ringkasan Project
 
 - **Nama Project**: Sistem Telemedicine Rumah Sakit + AI Symptom Checker (RS TeleMedika Digital)
 - **Tujuan**: Menghadirkan portal layanan medis digital modern, teraman, dan terintegrasi untuk 3 peran utama: **Pasien**, **Dokter**, dan **Admin Rumah Sakit**.
@@ -19,7 +19,7 @@
 
 ---
 
-## 2. 🛠️ Stack Teknis Lengkap & Versi Aktual
+## 2.  Stack Teknis Lengkap & Versi Aktual
 
 Seluruh dependensi di bawah diambil langsung dari konfigurasi `package.json` dan arsitektur aktif saat ini:
 
@@ -47,9 +47,9 @@ Seluruh dependensi di bawah diambil langsung dari konfigurasi `package.json` dan
 
 ---
 
-## 3. 🎯 Rincian Fase Pengembangan (Phase 0 - Phase 6)
+## 3.  Rincian Fase Pengembangan (Phase 0 - Phase 6)
 
-### 🔑 Phase 0: Auth, RBAC, & System Shell
+###  Phase 0: Auth, RBAC, & System Shell
 - **Fitur Utama**: Register Pasien, Login Multi-Role (Pasien, Dokter, Admin), Session Handling via HttpOnly Cookies, Shell Layout Responsif per Role.
 - **Endpoint API**:
   - `POST /api/auth/register` — Pendaftaran akun Pasien baru.
@@ -65,7 +65,7 @@ Seluruh dependensi di bawah diambil langsung dari konfigurasi `package.json` dan
 
 ---
 
-### 📅 Phase 1: Doctor Booking Wizard & Schedule Management
+###  Phase 1: Doctor Booking Wizard & Schedule Management
 - **Fitur Utama**: Pengaturan Jadwal Praktik Mingguan oleh Dokter/Admin, Booking Wizard 3-Langkah untuk Pasien (Pilih Dokter -> Pilih Tanggal & Slot Jam -> Konfirmasi), Monitoring Status Janji Temu (`pending`, `confirmed`, `completed`, `cancelled`).
 - **Endpoint API**:
   - `GET /api/doctors` — Daftar dokter aktif beserta spesialisasi & STR.
@@ -80,7 +80,7 @@ Seluruh dependensi di bawah diambil langsung dari konfigurasi `package.json` dan
 
 ---
 
-### 🩺 Phase 2: Medical Records & Strict Admin Privacy
+###  Phase 2: Medical Records & Strict Admin Privacy
 - **Fitur Utama**: Pengisian Rekam Medis (Diagnosis, Keluhan Utama, Catatan Klinis, Tanda Vital: TD, Nadi, Suhu, BB) oleh Dokter setelah konsultasi.
 - **Endpoint API**:
   - `POST /api/medical-records` — Dokter menerbitkan/meng-update rekam medis.
@@ -94,7 +94,7 @@ Seluruh dependensi di bawah diambil langsung dari konfigurasi `package.json` dan
 
 ---
 
-### 📹 Phase 3: Video Call Telemedicine (LiveKit Cloud)
+###  Phase 3: Video Call Telemedicine (LiveKit Cloud)
 - **Fitur Utama**: Konsultasi tatap muka online WebRTC langsung di browser, pembuatan room otomatis saat janji temu dikonfirmasi, kontrol mic/kamera/screen-share, indikator status room (`waiting`, `active`, `completed`).
 - **Endpoint API**:
   - `POST /api/appointments/[id]/video-token` — Penjanaan token WebRTC LiveKit.
@@ -104,7 +104,7 @@ Seluruh dependensi di bawah diambil langsung dari konfigurasi `package.json` dan
 
 ---
 
-### 🤖 Phase 4: AI Symptom Checker (Google Gemini API)
+###  Phase 4: AI Symptom Checker (Google Gemini API)
 - **Fitur Utama**: Skrining gejala awal mandiri pasien berbasis interaksi form/chat, dianalisis oleh engine AI **Google Gemini 3.5** (`gemini-3.5-flash`). Menghasilkan:
   - Daftar kemungkinan kondisi medis (beserta tingkat probabilitas).
   - Tingkat keparahan / triase (*Ringan*, *Sedang*, *Berat / Darurat Medis*).
@@ -118,7 +118,7 @@ Seluruh dependensi di bawah diambil langsung dari konfigurasi `package.json` dan
 
 ---
 
-### 💊 Phase 5: Digital Prescriptions & PDF Report Generation
+###  Phase 5: Digital Prescriptions & PDF Report Generation
 - **Fitur Utama**: Penerbitan Resep Obat Digital oleh Dokter (array item obat: nama, dosis, frekuensi, durasi, catatan), pembuatan & *downloading* Laporan Rekam Medis berformat PDF ber-Kop RS TeleMedika secara *server-side buffer stream*.
 - **Endpoint API**:
   - `POST /api/prescriptions` — Dokter menerbitkan/memperbarui resep digital (Audit: `CREATE_PRESCRIPTION` & `UPDATE_PRESCRIPTION`).
@@ -129,7 +129,7 @@ Seluruh dependensi di bawah diambil langsung dari konfigurasi `package.json` dan
 
 ---
 
-### 📊 Phase 6: Hospital Analytics Dashboard (Admin Only)
+###  Phase 6: Hospital Analytics Dashboard (Admin Only)
 - **Fitur Utama**: Dashboard analitik operasional rumah sakit khusus Admin berbasis grafik responsif (**Recharts**). Menampilkan: Total Pasien, Total Dokter, Total Sesi Konsultasi, Breakdown Status Janji Temu, Top 5 Dokter Teraktif, Tren Konsultasi harian, dan Agregat Diagnosa Penyakit Terbanyak.
 - **Endpoint API**:
   - `GET /api/admin/analytics` — Mengembalikan seluruh payload statistik agregat dalam 1 *round-trip*. Audit: `VIEW_ANALYTICS_DASHBOARD`.
@@ -140,7 +140,7 @@ Seluruh dependensi di bawah diambil langsung dari konfigurasi `package.json` dan
 
 ---
 
-## 📁 4. Struktur Folder Project (`src/`)
+##  4. Struktur Folder Project (`src/`)
 
 ```
 sistem-telemedicine-rumah-sakit/
@@ -280,7 +280,7 @@ sistem-telemedicine-rumah-sakit/
 
 ---
 
-## 🔑 5. Daftar Environment Variables (`.env.local`)
+##  5. Daftar Environment Variables (`.env.local`)
 
 Variabel lingkungan yang wajib dikonfigurasi di file `.env.local` sebelum menjalankan project:
 
@@ -294,11 +294,9 @@ Variabel lingkungan yang wajib dikonfigurasi di file `.env.local` sebelum menjal
 | `LIVEKIT_API_KEY` | API Key resmi dari dashboard LiveKit Cloud |
 | `LIVEKIT_API_SECRET` | API Secret resmi dari dashboard LiveKit Cloud untuk membuat token room |
 
-> ⚠️ **Catatan Keamanan**: Jangan pernah melakukan komit file `.env.local` yang berisi kunci rahasia asli ke repository publik.
-
 ---
 
-## 🔒 6. Prinsip Keamanan & Privasi Sisi Sistem
+##  6. Prinsip Keamanan & Privasi Sisi Sistem
 
 Sistem RS TeleMedika menerapkan standar keamanan dan privasi medis terbaik:
 
@@ -319,7 +317,7 @@ Sistem RS TeleMedika menerapkan standar keamanan dan privasi medis terbaik:
 
 ---
 
-## 🚀 7. Cara Menjalankan Project Dari Awal
+##  7. Cara Menjalankan Project Dari Awal
 
 Ikuti langkah-langkah di bawah ini untuk menjalankan project ini di lingkungan lokal Anda:
 
@@ -356,12 +354,12 @@ Buka browser Anda dan akses aplikasi di: `http://localhost:3000`.
 
 ---
 
-## 📋 8. Status Verifikasi Akhir Codebase
+##  8. Status Verifikasi Akhir Codebase
 
 Seluruh codebase telah melalui verifikasi ketat sebelum rilis final:
 
 - **TypeScript Static Analysis (`npx tsc --noEmit`)**:
-  `STATUS: 0 ERRORS (CLEAN)` ✅
+  `STATUS: 0 ERRORS (CLEAN)` 
 - **Next.js Production Build (`npm run build`)**:
-  `STATUS: SUCCESSFUL (100%)` ✅
+  `STATUS: SUCCESSFUL (100%)` 
   - Total **15 Static Pages** & **18 Dynamic API Routes** berhasil di-compile tanpa warning/error.
